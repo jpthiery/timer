@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import './timer.css';
+import React, {SyntheticEvent, useState} from "react";
+import './timerForms.css';
 
 class TimerFormProps {
     constructor(
@@ -25,9 +25,16 @@ const TimerForms = ({start}: TimerFormProps) => {
         start(tmp_duration)
     }
 
+    const onKeyUp = (e: any) => {
+        if (e.keyCode === 13 ){
+            e.preventDefault()
+            sub()
+        }
+    }
+
     return (
         <div>
-            <p>Duration: <input value={tmp_duration} onChange={e => change(e.target.value)}/></p>
+            <p>Duration: <input value={tmp_duration} onChange={e => change(e.target.value)} onKeyUp={e => onKeyUp(e)}/></p>
             <p>
                 <button onClick={e => sub()}>Start</button>
             </p>

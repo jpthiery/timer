@@ -1,6 +1,6 @@
 import React from "react";
 import TimerForms from "./TimerForms";
-import './digital-7.regular.ttf'
+import '/src/fonts/digital-7.regular.ttf'
 
 export default {
     title: "Design/Atome/TimerForms",

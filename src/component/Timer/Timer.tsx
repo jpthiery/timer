@@ -57,7 +57,7 @@ const Timer = ({duration, end_callback}: TimerProps) => {
         [current_duration]
     )
 
-    const text = (current_duration > 0) ? toHHMMSS(current_duration) : <div>
+    const text = !finished ? toHHMMSS(current_duration) : <div>
         <p>Finished !</p>
         <p>
             <button onClick={e => end_callback()}>Reset</button>

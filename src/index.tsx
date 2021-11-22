@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Orchestrator from "./page/Orchestrator/Orchestrator";
+import TimerShell from "./page/TimerShell/TimerShell";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Orchestrator />
+    <TimerShell />
   </React.StrictMode>,
   document.getElementById('root')
 );
