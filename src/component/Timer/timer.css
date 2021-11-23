@@ -2,3 +2,25 @@
   font-family: 'Digital-7';
   src: local('Digital-7'), url(/src/fonts/digital-7.regular.ttf) format('truetype');
 }
+
+.pulsate {
+  transform: scale(1);
+  animation: pulse 500ms infinite;
+  color: crimson;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    /* box-shadow: 0 0 0 0 rgba(206, 16, 16, 0.7); */
+  }
+
+  70% {
+    transform: scale(1);
+    /* box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); */
+  }
+
+  100% {
+    transform: scale(0.95);
+    /* box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); */
+  }
+}

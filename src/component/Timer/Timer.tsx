@@ -18,16 +18,26 @@ const Timer = ({duration, end_callback}: TimerProps) => {
 
     const audio = new Audio('http://streaming.tdiradio.com:8000/house.mp3')
 
+    const playSound = () => {
+        // audio.play()
+    }
+
+    const pauseSound = () => {
+        audio.pause()
+    }
+
+    const style_text = current_duration <= 10 ? 'pulsate' : ''
+
 
     useEffect(() => {
-            if (current_duration > 0) {
+            if (current_duration > 1) {
 
                 const id = setTimeout(() => {
                         setDuration(current_duration - 1)
                     },
                     1000)
                 return () => {
-                    audio.pause()
+                    pauseSound()
                     clearTimeout(id)
                 }
             } else {
@@ -36,7 +46,7 @@ const Timer = ({duration, end_callback}: TimerProps) => {
                     },
                     1000)
                 return () => {
-                    audio.pause()
+                    pauseSound()
                     clearTimeout(id)
                 }
             }
@@ -46,15 +56,15 @@ const Timer = ({duration, end_callback}: TimerProps) => {
     )
 
     useEffect(() => {
-            finished ? audio.play() : audio.pause()
+            finished ? playSound() : pauseSound()
         },
         [finished])
 
-    const text = !finished ? toHHMMSS(current_duration) : <div>
-        <p>Finished !</p>
+    const text = !finished ? <p className={style_text}>{toHHMMSS(current_duration)}</p> : <div>
+        <p className='pulsate'>Finished !</p>
         <p>
             <button onClick={e => {
-                audio.pause()
+                pauseSound()
                 end_callback()
             }}>Reset
             </button>
