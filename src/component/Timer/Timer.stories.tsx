@@ -1,6 +1,5 @@
 import React from "react";
 import Timer from "./Timer";
-import './digital-7.regular.ttf'
 
 export default {
     title: "Design/Atome/Timer",

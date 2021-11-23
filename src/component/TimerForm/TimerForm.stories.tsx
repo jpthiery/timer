@@ -1,6 +1,5 @@
 import React from "react";
 import TimerForms from "./TimerForms";
-import '/src/fonts/digital-7.regular.ttf'
 
 export default {
     title: "Design/Atome/TimerForms",
@@ -14,5 +13,6 @@ export const Smallest = Template.bind({})
 Smallest.args = {
     start: (duration: number) => {
         console.log(`Start for ${duration}`)
-    }
+    },
+    initial_duration: 0
 }

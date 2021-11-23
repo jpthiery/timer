@@ -6,11 +6,19 @@ import './timershell.css'
 const TimerShell = (props: any) => {
 
     const [duration, setDuration] = useState(0)
+    const [edit_mode, setEditMod] = useState(true)
 
-    let content = <TimerForms start={value => setDuration(value)}/>
+    const start_timer = (value: number) => {
+        setDuration(value)
+        setEditMod(false)
+    }
 
-    if (duration > 0) {
-        content = <Timer duration={duration} end_callback={() => setDuration(0)}/>
+    let content = <TimerForms
+        initial_duration={duration}
+        start={start_timer}/>
+
+    if (!edit_mode) {
+        content = <Timer duration={duration} end_callback={() => setEditMod(true)}/>
     }
 
     return (

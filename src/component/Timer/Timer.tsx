@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import toHHMMSS from "../../time_utils";
 import './timer.css'
 
 
@@ -15,25 +16,11 @@ const Timer = ({duration, end_callback}: TimerProps) => {
     const [current_duration, setDuration] = useState(duration)
     const [finished, setFinished] = useState(false)
 
-    const double_zero = (value: number) => {
-        if (value < 10) {
-            return `0${value}`
-        } else {
-            return value
-        }
+    const audio = new Audio('http://streaming.tdiradio.com:8000/house.mp3')
 
-    }
-
-    const toHHMMSS = (secs: number) => {
-        const hours = Math.floor(secs / 3600)
-        const minutes = Math.floor(secs / 60) % 60
-        const seconds = secs % 60
-        let res = hours > 0 ? `${double_zero(hours)}H` : ''
-        res += `${double_zero(minutes)}:${double_zero(seconds)}`
-        return res
-    }
 
     useEffect(() => {
+            navigator.mediaDevices.getUserMedia({audio: true})
             if (current_duration > 0) {
 
                 const id = setTimeout(() => {
@@ -41,6 +28,7 @@ const Timer = ({duration, end_callback}: TimerProps) => {
                     },
                     1000)
                 return () => {
+                    audio.pause()
                     clearTimeout(id)
                 }
             } else {
@@ -49,6 +37,7 @@ const Timer = ({duration, end_callback}: TimerProps) => {
                     },
                     1000)
                 return () => {
+                    audio.pause()
                     clearTimeout(id)
                 }
             }
@@ -57,10 +46,19 @@ const Timer = ({duration, end_callback}: TimerProps) => {
         [current_duration]
     )
 
+    useEffect(() => {
+            finished ? audio.play() : audio.pause()
+        },
+        [finished])
+
     const text = !finished ? toHHMMSS(current_duration) : <div>
         <p>Finished !</p>
         <p>
-            <button onClick={e => end_callback()}>Reset</button>
+            <button onClick={e => {
+                audio.pause()
+                end_callback()
+            }}>Reset
+            </button>
         </p>
     </div>
     return (
