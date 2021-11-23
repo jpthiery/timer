@@ -20,7 +20,6 @@ const Timer = ({duration, end_callback}: TimerProps) => {
 
 
     useEffect(() => {
-            navigator.mediaDevices.getUserMedia({audio: true})
             if (current_duration > 0) {
 
                 const id = setTimeout(() => {
