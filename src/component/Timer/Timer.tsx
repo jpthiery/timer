@@ -16,10 +16,10 @@ const Timer = ({duration, end_callback}: TimerProps) => {
     const [current_duration, setDuration] = useState(duration)
     const [finished, setFinished] = useState(false)
 
-    const audio = new Audio('http://streaming.tdiradio.com:8000/house.mp3')
+    const audio = new Audio('./school.mp3')
 
     const playSound = () => {
-        // audio.play()
+        audio.play()
     }
 
     const pauseSound = () => {
